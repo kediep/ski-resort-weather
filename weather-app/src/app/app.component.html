@@ -1,36 +1,52 @@
+<div class="search">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <input type="text" placeholder="Search Resort" name="resort" [(ngModel)]="resortName">
+  </form>
+</div>
+
 <div class="container">
   <div class="upper-data">
-    <img src="../assets/images/hot.png" *ngIf="14 < 15">
-    <img src="../assets/images/cold.png" *ngIf="14 <= 15">
-
+    <img src="../assets/images/daytime.png" *ngIf="isDayTime()">
+    <img src="../assets/images/nighttime.png" *ngIf="!isDayTime()">
     <div class="weather-data">
-      <div class="location">Wellington</div>
-      <div class="temperature">{{ 14.40 | number: '1.0-0'}}°F</div>
+      <div class="location">{{ getLocation() }}</div>
+      <div class="temperature">{{ getTemperature() }}</div>
+      <div class="summary">{{ getSummary() }}</div>
     </div>
 
   </div>
   <div class="lower-data">
-    <div class="more-info-label">
-      More Information
+    <div class="resort-info-label">
+      Resort Information
     </div>
     <div class="more-info-container">
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/images/min.png" alt="">
-          <span>min</span>
+          <img src="../assets/images/windspeed.png" alt="">
+          <span>wind speed</span>
         </div>
         <div class="info-block-value">
-          10°F
+          {{ getWindSpeed() }}
         </div>
       </div>
 
       <div class="info-block">
         <div class="info-block-label">
-          <img src="../assets/images/max.png" alt="">
-          <span>max</span>
+          <img src="../assets/images/winddirection.png" alt="">
+          <span>wind direction</span>
         </div>
         <div class="info-block-value">
-          20°F
+          {{ getWindDirection() }}
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/images/rain.png" alt="">
+          <span>rain</span>
+        </div>
+        <div class="info-block-value">
+          {{ getRain() }}
         </div>
       </div>
 
@@ -40,17 +56,7 @@
           <span>humidity</span>
         </div>
         <div class="info-block-value">
-          77%
-        </div>
-      </div>
-
-      <div class="info-block">
-        <div class="info-block-label">
-          <img src="../assets/images/wind.png" alt="">
-          <span>wind</span>
-        </div>
-        <div class="info-block-value">
-          11 km/h
+          {{ getHumidity() }}
         </div>
       </div>
 
@@ -58,6 +64,10 @@
 
   </div>
 
+</div>
+
+<div class="logo">
+  <img src="../assets/images/favicon.png">
 </div>
 
 <router-outlet></router-outlet>

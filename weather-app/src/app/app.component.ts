@@ -10,11 +10,16 @@ import { WeatherService } from './services/weather.service';
 export class AppComponent implements OnInit {
 
   constructor(private weatherService: WeatherService) {
-  
   }
 
-  weatherData?: WeatherData;
+  private weatherData?: WeatherData;
   resortName: string = 'Breckenridge'
+  private summary: string = '';
+  private temperature: string = '';
+  private windSpeed: string = '';
+  private windDirection: string = '';
+  private rain: string = '';
+  private humidity: string = '';
 
   ngOnInit(): void {
     this.getWeatherData(this.resortName);
@@ -24,40 +29,73 @@ export class AppComponent implements OnInit {
     this.getWeatherData(this.resortName);
   }
 
-
   isDayTime() {
-    const weatherTime = this.weatherData?.forecast[this.weatherData?.forecast.length - 1].time;
-    const time = Number(weatherTime?.replace(/[^0-9\.]+/g, ""));
-    const meridiem = weatherTime?.slice(-2);
-    return (meridiem === "AM" && time > 6) || (meridiem === "PM" && time < 8);
+    const currentHour = Number(new Date().toLocaleTimeString([], {hour: '2-digit', hour12: false}));
+    return (currentHour > 6) || (currentHour < 20);
   }
 
   getLocation() {
-    return this.weatherData?.basicInfo.name;
+    this.setLocation();
+    return this.resortName;
+  }
+
+  setLocation(): void {
+    this.resortName = this.weatherData?.basicInfo.name ?? '';
   }
 
   getSummary() {
-    return this.weatherData?.forecast[this.weatherData?.forecast.length - 1].summary ?? '';
+    this.setSummary();
+    return this.summary;
+  }
+
+  setSummary(): void {
+    this.summary = this.weatherData?.forecast[this.weatherData?.forecast.length - 1].summary ?? '';
   }
 
   getTemperature() {
-    return this.weatherData?.forecast[this.weatherData?.forecast.length - 1].maxTemp ?? '';
+    this.setTemperature();
+    return this.temperature;
+  }
+
+  setTemperature() {
+    this.temperature = this.weatherData?.forecast[this.weatherData?.forecast.length - 1].maxTemp ?? '';
   }
 
   getWindSpeed() {
-    return this.weatherData?.forecast[this.weatherData?.forecast.length - 1].windSpeed ?? '';
+    this.setWindSpeed();
+    return this.windSpeed;
   }
 
+  setWindSpeed() {
+    this.windSpeed = this.weatherData?.forecast[this.weatherData?.forecast.length - 1].windSpeed ?? '';
+  }
+  
+
   getWindDirection() {
-    return this.weatherData?.forecast[this.weatherData?.forecast.length - 1].windDirection ?? '';
+    this.setWindDirection();
+    return this.windDirection;
+  }
+
+  setWindDirection() {
+    this.windDirection = this.weatherData?.forecast[this.weatherData?.forecast.length - 1].windDirection ?? '';
   }
 
   getRain() {
-    return this.weatherData?.forecast[this.weatherData?.forecast.length - 1].rain ?? '';
+    this.setRain();
+    return this.rain;
+  }
+
+  setRain() {
+    this.rain = this.weatherData?.forecast[this.weatherData?.forecast.length - 1].rain ?? '';
   }
 
   getHumidity() {
-    return this.weatherData?.forecast[this.weatherData?.forecast.length - 1].humidity ?? '';
+    this.setHumidity();
+    return this.humidity;
+  }
+
+  setHumidity() {
+    this.humidity = this.weatherData?.forecast[this.weatherData?.forecast.length - 1].humidity ?? '';
   }
 
   private getWeatherData(resortName: string) {

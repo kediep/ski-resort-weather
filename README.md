@@ -1,6 +1,6 @@
 # Ski Resort Weather
 
-![alt text](https://github.com/kevindiepswe/ski-resort-weather/blob/master/homepage.jpg?raw=true)
+![Screenshot](homepage.jpg)
 
 This is an Angular project that allows users to check the weather conditions of ski resorts. The application shows the name of the resort, the maximum temperature for the current hour, and a short summary of the weather. Users can search for any resort by typing its name in the search bar. The application also provides information about wind speed, wind direction, rain depth, and humidity.
 

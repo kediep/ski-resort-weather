@@ -14,5 +14,5 @@ To search for a ski resort, simply type its name in the search bar and hit enter
 
 ## Contributing
 
-If you'd like to contribute to this project, you're welcome to submit pull requests or open issues on the GitHub repository: https://github.com/KevinDiepSWE/ski-resort-weather
+If you'd like to contribute to this project, you're welcome to submit pull requests or open issues on the GitHub repository: https://github.com/kediep/ski-resort-weather
 

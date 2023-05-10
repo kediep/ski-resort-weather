@@ -25,14 +25,14 @@ body {
   align-items: center;
 }
 
-.logo {
+.footer {
   margin-top: 1.5em;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.logo img {
+.footer img {
   width: 10%;
   height: auto;
 }

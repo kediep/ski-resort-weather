@@ -1,58 +1,33 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { WeatherComponent } from './weather/weather.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { WeatherService } from './services/weather.service';
-import { HttpClient, HttpHeaders, HttpParams, HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
 
 describe('AppComponent', () => {
 
-  let app: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      imports: [HttpClientModule, FormsModule, AppRoutingModule]
-    })
-    .compileComponents();
-  }));
-
+  let weatherComponent: WeatherComponent;
+  let logo: HTMLElement;
+  
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule],
+      declarations: [AppComponent, WeatherComponent],
+      providers: [WeatherService, { provide: ComponentFixtureAutoDetect, useValue: true}]
+    })
     fixture = TestBed.createComponent(AppComponent);
-    app = fixture.componentInstance;
-    fixture.detectChanges();
+    weatherComponent = fixture.nativeElement.querySelector('app-weather');
+    logo = fixture.nativeElement.querySelector('img');
+  });
+  
+  it('should load in weather component', () => {
+    expect(weatherComponent).toBeTruthy();
   });
 
-
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should have a footer logo', () => {
+    expect(logo).toBeTruthy();
   });
-
-
-  // it('should get resort name', () => {
-  //   expect(app.resortName).toBe('Breckenridge');
-  // });
-
-  // it('should get location', () => {
-  //   expect(app.getLocation()).toBe('Breckenridge');
-  // });
-
-  // it('should get whether it is daytime', () => {
-  //   let currentHour = Number(new Date().toLocaleTimeString([], {hour: '2-digit', hour12: false}));
-  //   if (currentHour <= 6 || currentHour >= 20) {
-  //     expect(app.isDayTime()).toBeFalse();
-  //   } else {
-  //     expect(app.isDayTime()).toBeTrue();
-  //   }
-  // });
-
-  // it('should get the summary', () => {
-  //   expect(app.getSummary() == 'some clouds' || app.getSummary() == 'snow showers' || app.getSummary() == 'clear').toBeTrue();
-  // });
-
-
 });

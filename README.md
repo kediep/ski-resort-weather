@@ -12,7 +12,3 @@ To view this application, head over to: https://skiresortweather.web.app/
 
 To search for a ski resort, simply type its name in the search bar and hit enter. The application will try to match your input to the closest resort name in the database. If there's a misspelling or typo, the application will take a guess and choose the resort it thinks you want.
 
-## Contributing
-
-If you'd like to contribute to this project, you're welcome to submit pull requests or open issues on the GitHub repository: https://github.com/kediep/ski-resort-weather
-
